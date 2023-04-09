@@ -1,13 +1,5 @@
-!/usr/bin/python3
-"""Compress web static package
-"""
-from fabric.api import *
-from datetime import datetime
-from os import path
-=======
 #!/usr/bin/python3
-"""a script to send an archive file to a remote server
-and decompress it"""
+#a script to send an archive file to a remote server and decompress it
 
 from fabric.api import run, env, put
 import os.path
