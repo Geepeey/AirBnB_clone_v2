@@ -1,6 +1,6 @@
-# Puppet for setup
+#  A Puppet manifest file which is used for automated configuration management of a server
 
-$nginx_conf = "server {
+$nginx_conf = 'server {
     listen 80 default_server;
     listen [::]:80 default_server;
     add_header X-Served-By ${hostname};
@@ -18,7 +18,7 @@ $nginx_conf = "server {
       root /var/www/html;
       internal;
     }
-}"
+}'
 
 package { 'nginx':
   ensure   => 'present',
@@ -69,7 +69,7 @@ file { '/var/www':
 
 -> file { '/var/www/html/index.html':
   ensure  => 'present',
-  content => "This is my first upload  in /var/www/index.html***\n"
+  content => "This is my first upload in /var/www/index.html***\n"
 }
 
 -> file { '/var/www/html/404.html':
@@ -82,6 +82,8 @@ file { '/var/www':
   content => $nginx_conf
 }
 
--> exec { 'nginx restart':
-  path => '/etc/init.d/'
+-> service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
 }
+
