@@ -3,7 +3,7 @@
 This module starts a Flask web application that displays a list of states.
 """
 
-from flask import Flask, render_template, teardown_appcontext
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
