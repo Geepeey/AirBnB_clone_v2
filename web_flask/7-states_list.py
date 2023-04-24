@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-This module starts a Flask web application that displays a list of states.
-"""
+"""This module starts a Flask web application that displays a list of states."""
 
 from flask import Flask, render_template
 from models import storage
@@ -21,8 +19,7 @@ def teardown_session(exception):
 def states_list():
     """Displays a list of states."""
     states = storage.all(State)
-    sorted_states = sorted(states.values(), key=lambda x: x.name)
-    return render_template('7-states_list.html', states=sorted_states)
+    return render_template('7-states_list.html', states=states)
 
 
 if __name__ == '__main__':
