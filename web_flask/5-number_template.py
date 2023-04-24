@@ -32,9 +32,9 @@ def python(text):
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def number(n):
-    """Route display “n is a number” only if n is an integer."""
-    return '{} is a number'.format(n)
+def a_number(n):
+    """displays only when a number is passed on the url"""
+    return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
