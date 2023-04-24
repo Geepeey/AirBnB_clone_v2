@@ -9,27 +9,25 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close(self):
-    """ Method to close the session """
+def teardown(exception):
+    """Remove the current SQLAlchemy Session"""
     storage.close()
 
 
-@app.route("/states", strict_slashes=False)
-def states():
-    """Displays an HTML page with a list of all States.
-    States are sorted by name.
-    """
-    states = storage.all("State")
-    return render_template("9-states.html", state=states)
+@app.route('/states', strict_slashes=False)
+def find_all_states():
+    """renders a html page with states"""
+    states = storage.all(State)
+    return render_template('9-states.html', states=states, mode='all')
 
 
-@app.route("/states/<id>", strict_slashes=False)
-def states_id(id):
-    """Displays an HTML page with info about <id>, if it exists."""
-    for state in storage.all("State").values():
+@app.route('/states/<id>', strict_slashes=False)
+def find_state_by_id(id):
+    """Displays a html page with citys of that state"""
+    for state in storage.all(State).values():
         if state.id == id:
-            return render_template("9-states.html", state=state)
-    return render_template("9-states.html")
+            return render_template('9-states.html', states=state, mode='id')
+    return render_template('9-states.html', states=state, mode='none')
 
 
 if __name__ == '__main__':
