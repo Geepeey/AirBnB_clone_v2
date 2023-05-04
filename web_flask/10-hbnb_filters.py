@@ -1,10 +1,20 @@
 #!/usr/bin/python3
 """Starts a Flask web application"""
+
 from models import storage
 from flask import Flask
 from flask import render_template
+from flask import Flask, render_template
+from models import storage
+
 
 app = Flask(__name__)
+
+
+@app.teardown_appcontext
+def teardown(exception):
+    """Remove the current SQLAlchemy Session"""
+    storage.close()
 
 
 @app.route("/hbnb_filters", strict_slashes=False)
